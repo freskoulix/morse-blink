@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+            }
+
+            .container {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .message {
+                width: 50%;
+                height: 50%;
+                border: 0;
+                padding: 10px;
+                resize: none;
+            }
+
+            .send {
+                width: 50%;
+                height: 40px;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h3>Blink in morse your thoughts</h3>
+            <textarea class="message"></textarea>
+            <button class="send">Morse it!</button>
+        </div>
+        <script>
+            window.addEventListener('load', function () {
+                const message = document.querySelector('.message');
+                const send = document.querySelector('.send');
+                send.addEventListener('click', function () {
+                    const msg = message.value.trim();
+
+                    if (msg.length === 0) {
+                        return;
+                    }
+
+                    fetch(`http://__SERVER_IP__/message`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: msg
+                    }).then(function (response) {
+                        if (!response.ok) {
+                            return Promise.reject(response);
+                        }
+
+                        Promise.resolve(response);
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
