@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Raspberry Pico - Morse Blink - Singing Void</title>
+
         <style>
             html, body {
                 width: 100%;
@@ -38,6 +40,7 @@
             <textarea class="message"></textarea>
             <button class="send">Morse it!</button>
         </div>
+
         <script>
             window.addEventListener('load', function () {
                 const message = document.querySelector('.message');
@@ -49,7 +52,7 @@
                         return;
                     }
 
-                    fetch(`http://__SERVER_IP__/message`, {
+                    fetch('http://__SERVER_IP__/message', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
